@@ -1,12 +1,27 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCapsules, updateData } from "../redux/slice/capsuleSlice";
 
 const SearchForm = () => {
 
   const [option,setOption] = useState('')
+  const [searchValue,setSearchValue] = useState('')
+  
+  console.log(searchValue)
+  const dispatch = useDispatch()
+  const capsuleData = useSelector((state)=>state.capsule.capsules)
 
   const changeHandler = (e)=>{
-    console.log(e.target.value)
     setOption(e.target.value)
+  }
+
+  const clickHandler = ()=>{
+    if(!searchValue) {
+      alert('Please enter search value')
+      return
+    }
+    console.log(typeof searchValue)
+    dispatch(fetchCapsules({option,searchValue}))
   }
 
   return (
@@ -24,7 +39,7 @@ const SearchForm = () => {
       >
         <option selected>Search Filter</option>
         <option value="status">Status</option>
-        <option value="ol">Original Launch</option>
+        <option value="original_launch">Original Launch</option>
         <option value="type">Type</option>
       </select>
 
@@ -32,8 +47,9 @@ const SearchForm = () => {
         type="text"
         placeholder="Search capsules"
         className="border-2 border-gray-300 rounded-l px-4 py-2"
+        onChange={(e)=>setSearchValue(e.target.value)}
       />
-      <button className="bg-blue-500 text-white px-4 py-2 rounded-r">
+      <button className="bg-blue-500 text-white px-4 py-2 rounded-r" onClick={clickHandler}>
         Search
       </button>
     </div>
