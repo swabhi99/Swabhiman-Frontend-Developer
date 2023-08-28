@@ -57,7 +57,9 @@ const GridPattern = () => {
   };
   return (
     <>
-      <div className="grid  lg:grid-cols-3 gap-4 mt-4 sm:grid-cols-1 md:grid-cols-2 h-screen bg-yellow-100 p-8">
+    <div className="flex flex-col justify-between h-screen">
+
+      <div className="grid lg:grid-cols-3 gap-4  md:grid-cols-2 max-sm:grid-rows-1 bg-yellow-100 p-8">
         {records.map((capsule, index) => {
           const { capsule_id, status, original_launch, type, details } =
             capsule;
@@ -66,17 +68,17 @@ const GridPattern = () => {
               className="drop-shadow-md border-1 bg-green-300 p-4"
               key={index}
             >
-              <h2>id: {capsule_id}</h2>
-              <p>status: {status}</p>
-              <p>original launch: {original_launch}</p>
-              <p>type: {type}</p>
-              <p>Details: {details}</p>
+              <h2 className="">id: {capsule_id}</h2>
+              <p className="">status: {status}</p>
+              <p className="">original launch: {original_launch}</p>
+              <p className="">type: {type}</p>
+              <p className="">Details: {details}</p>
             </div>
           );
         })}
       </div>
 
-      <nav className="bg-grey-700 w-full text-center max-sm:invisible">
+      <nav className="bg-grey-700 w-full text-center">
         <ul className="inline-flex -space-x-px text-sm">
           <li>
             <a
@@ -92,7 +94,7 @@ const GridPattern = () => {
               <li key={i}>
                 <a
                   href="#"
-                  class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${currentPage===n ? 'bg-gray-700' : ''}`}
                   onClick={() => changeCPage(n)}
                 >
                   {n}
@@ -111,6 +113,7 @@ const GridPattern = () => {
           </li>
         </ul>
       </nav>
+      </div>
     </>
   );
 };
