@@ -6,15 +6,11 @@ const initialState ={
     isError:false,
 }
 
-// export const fetchCapsules = createAsyncThunk('fetchCapsules',async ()=>{
-//     const response=await fetch(`https://api.spacexdata.com/v3/capsules`);
-//     return response.json()
-// })
 
 export const fetchCapsules = createAsyncThunk('fetchCapsules',async (values)=>{
 
   if(values){
-  const response=await fetch(`https://api.spacexdata.com/v3/capsules?${values.option}=${values.searchValue}`);
+  const response=await fetch(`https://api.spacexdata.com/v3/capsules?${values.option.toLowerCase()}=${values.searchValue.toLowerCase()}`);
   return response.json()
   }else{
     const response=await fetch(`https://api.spacexdata.com/v3/capsules`);
@@ -34,7 +30,6 @@ export const counterSlice = createSlice({
         state.capsules = action.payload;
       });
       builder.addCase(fetchCapsules.rejected, (state, action) => {
-        console.log("Error", action.payload);
         state.isError = true;
       });
   },

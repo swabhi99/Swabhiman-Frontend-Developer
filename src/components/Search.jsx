@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCapsules, updateData } from "../redux/slice/capsuleSlice";
+import { useDispatch } from "react-redux";
+import { fetchCapsules } from "../redux/slice/capsuleSlice";
 
 const SearchForm = () => {
 
   const [option,setOption] = useState('')
   const [searchValue,setSearchValue] = useState('')
   
-  console.log(searchValue)
+ 
   const dispatch = useDispatch()
-  const capsuleData = useSelector((state)=>state.capsule.capsules)
 
   const changeHandler = (e)=>{
     setOption(e.target.value)
@@ -20,7 +19,7 @@ const SearchForm = () => {
       alert('Please enter search value')
       return
     }
-    console.log(typeof searchValue)
+
     dispatch(fetchCapsules({option,searchValue}))
   }
 

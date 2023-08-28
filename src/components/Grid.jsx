@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCapsules, updateData } from "../redux/slice/capsuleSlice";
+import { fetchCapsules } from "../redux/slice/capsuleSlice";
 import { Audio } from "react-loader-spinner";
 
 const GridPattern = () => {
@@ -16,11 +16,11 @@ const GridPattern = () => {
 
   useEffect(() => {
     dispatch(fetchCapsules());
-  }, []);
+  },[]);
 
 
-  if (capsules.isLoading === true || capsuleData === null || capsuleData.length==0) {
-    if(capsuleData.length==0){
+  if (capsules.isLoading === true || capsuleData === null || capsuleData.length===0) {
+    if(capsuleData.length===0){
     return(  <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 grid h-1/2 place-items-center" role="alert">
   <p class="font-bold">Something went wrong</p>
   <p>invalid search.</p>
@@ -76,7 +76,7 @@ const GridPattern = () => {
         })}
       </div>
 
-      <nav className="bg-grey-700 w-full text-center">
+      <nav className="bg-grey-700 w-full text-center max-sm:invisible">
         <ul className="inline-flex -space-x-px text-sm">
           <li>
             <a
